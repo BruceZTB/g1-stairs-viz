@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G1 爬楼梯轨迹</title>
+<meta name="description" content="G1 爬楼梯轨迹 v1 / v2">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<h1>G1 爬楼梯轨迹</h1>
+
+<div id="groups" class="groups"></div>
+
+<div class="stage">
+  <div class="viewer">
+    <div class="canvas-box" id="canvasBox">
+      <canvas id="view3d" aria-label="三维回放"></canvas>
+      <span class="chip" id="chip"></span>
+      <span class="spinner" id="loading" role="status" aria-label="加载中"></span>
+    </div>
+    <div class="controls">
+      <button id="btnPlay" type="button" class="icon primary" aria-label="播放 / 暂停" title="播放 / 暂停">
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l11-6.8a.8.8 0 0 0 0-1.4l-11-6.8A.8.8 0 0 0 8 5.2z"/></svg>
+      </button>
+      <input id="scrub" type="range" min="0" max="100" value="0" step="1" aria-label="进度">
+      <output id="timeOut" for="scrub">0.0 / 0.0</output>
+      <select id="speed" aria-label="速度" title="速度">
+        <option value="0.25">0.25×</option>
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+      <button id="btnFollow" type="button" class="icon toggle" aria-pressed="false" aria-label="镜头跟随" title="镜头跟随">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg>
+      </button>
+      <button id="btnLoop" type="button" class="icon toggle" aria-pressed="true" aria-label="循环" title="循环">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l3.5 3.5L17 10"/><path d="M3.5 12V10a3.5 3.5 0 0 1 3.5-3.5h13.5"/><path d="M7 21l-3.5-3.5L7 14"/><path d="M20.5 12v2a3.5 3.5 0 0 1-3.5 3.5H3.5"/></svg>
+      </button>
+      <button id="btnReset" type="button" class="icon" aria-label="复位视角" title="复位视角">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="side">
+    <video id="video" controls muted loop playsinline preload="metadata"></video>
+  </div>
+</div>
+
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
